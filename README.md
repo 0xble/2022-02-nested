@@ -76,13 +76,13 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
 ---
 
 # Sponsorname contest details
-- TBD main award pot
-- TBD gas optimization award pot
+- $27,000 USDC main award pot
+- $3,000 gas optimization award pot
 - Join [C4 Discord](https://discord.gg/code4rena) to register
-- Submit findings [using the C4 form](https://code4rena.com/contests/YYYY-MM-sponsorName-contest/submit)
+- Submit findings [using the C4 form](https://code4rena.com/contests/2022-02-nested-contest/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
-- Starts TBD XXX XXX XX 00:00 UTC
-- Ends TBD XXX XXX XX 23:59 UTC
+- Starts February 10, 2022 00:00 UTC
+- Ends February 12, 2022 23:59 UTC
 
 This repo will be made public before the start of the contest. (C4 delete this line when made public)
 
