@@ -6,7 +6,7 @@
 - $27,000 USDC main award pot
 - $3,000 USDC gas optimization award pot
 - Join [C4 Discord](https://discord.gg/code4rena) to register
-- Submit findings [using the C4 form](https://code4rena.com/contests/2022-02-nested-contest/submit)
+- Submit findings [using the C4 form](https://code4rena.com/contests/2022-02-nested-finance-contest/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
 - Starts February 10, 2022 00:00 UTC
 - Ends February 12, 2022 23:59 UTC
