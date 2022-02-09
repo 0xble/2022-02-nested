@@ -13,6 +13,85 @@
 
 This repo will be made public before the start of the contest. (C4 delete this line when made public)
 
+## Scope
+
+All the Solidity files are included in the audit scope, **expect the ones in the `contracts/mocks` folder**.
+
+## Previous Audits
+
+The preview version has been audited 3 times (at the end of 2021):
+- [CodeArena 2021-11](https://code4rena.com/reports/2021-11-nested)
+- [Peckshield Audit Report v1.0](audits/PeckShield-Audit-Report-Nested-v1.0.pdf)
+- [Red4Sec Audit Report v1.0](audits/Red4Sec_Nested_Finance_Security_Audit_Report_v3.pdf)
+
+## New version
+
+This new version includes:
+- Audit fixes.
+- `NestedFactory` refactoring (interface simplication + expanding the possibilities).
+- Operators mechanism simplification.
+- Add proxy.
+
+## Known issues/topics
+
+### Copy my portfolio (fees trick)
+
+A user can copy his own portfolio to reduce the fees, however a require statement won't fix this issue...
+
+This problem cannot be corrected but only mitigated, since the user can use two different wallets.
+Currently the front-end doesn't allow to duplicate a portfolio with the same address.
+
+### Deflationary/Rebase Tokens
+
+The protocol is no fully compatible with deflationary/rebase tokens. In fact, you can add a deflationary/rebase token to your portfolio but it can lead to unpredictable behaviors (positive or negative).
+
+We have chosen to manage the tokens with a fixed amount (the input) after considering several solutions.
+
+**So, how can we mitigate that ?**
+
+We're maintaining a list of all rebase tokens (source coingecko, which is well maintained) and prevent users from adding them to their portfolio on the platform.
+
+## Coverage
+
+`npx hardhat coverage`
+
+![image](https://user-images.githubusercontent.com/22816913/153220720-41ef117e-276a-4248-b259-9860c7525188.png)
+![image](https://user-images.githubusercontent.com/22816913/153220602-3b6f3531-cf32-42e9-8a71-1ea60d569ba6.png)
+
+
+## Links
+
+- **Website** : https://nested.fi
+- **Documentation** : https://docs.nested.finance/
+- **Medium** : https://nestedfinance.medium.com/
+- **Twitter** : https://twitter.com/NestedFinance
+- **Telegram** : https://t.me/NestedFinanceChannel
+- **Discord** : https://discord.gg/VW8ZZsACzd
+
+## Contact us 📝
+
+Wardens! If you have any questions, please contact us!
+
+#### Axxe (Smart contract engineer)
+- **Telegram** : @axxedev
+- **Discord** : axxe#8561
+- **Schedule a call** : [Calendly](https://calendly.com/maxime-brugel/lets-talk)
+
+#### Adrien (CTO)
+
+- **Telegram** : @adrienspt
+- **Discord** : Adrien | Nested Finance#6564
+- **Schedule a call** : [Calendly](https://calendly.com/adrien-supizet/30min)
+
+## Beta access β
+
+If you want to access the beta version of Nested Finance, go to : https://app.nested.fi/.
+
+It can help to better understand the protocol context.
+
+
+---
+
 # Introduction
 
 Nested Finance is a decentralized protocol providing customizable financial products in the form of NFTs. 
@@ -41,14 +120,13 @@ Furthermore, we allow users to copy other users NestedNFTs. The creator of the i
 
 ## Core contracts
 
-| Name             | Purpose  |
-|------------------|----------|
-| **NestedFactory**    | Entry point to the protocol. Holds the business logic. Responsible for interactions with operators (submit orders). |
-| **NestedAsset**      | Collection of ERC721 tokens. Called NestedNFT across the codebase. |
-| **NestedReserve**    | Holds funds for the user. Transferred from the NestedFactory. |
-| **NestedRecords**    | Tracks underlying assets of NestedNFTs. (Amount, NestedReserve). |
-| **FeeSplitter**      | Receives payments in ERC20 tokens from the factory when fees are sent. Allows each party to claim the amount they are due. |
-| **NestedBuyBacker**  | Pulls tokens from the FeeSplitter, buys back NST tokens on the market, and burns a part of it. |
+| Name             |  LOC | Purpose  |
+|------------------|------|----------|
+| **NestedFactory**    | 404 | Entry point to the protocol. Holds the business logic. Responsible for interactions with operators (submit orders). |
+| **NestedAsset**      | 66 | Collection of ERC721 tokens. Called NestedNFT across the codebase. |
+| **NestedReserve**    | 17 | Holds funds for the user. Transferred from the NestedFactory. |
+| **NestedRecords**    | 110 | Tracks underlying assets of NestedNFTs. (Amount, NestedReserve). |
+| **FeeSplitter**      | 188 | Receives payments in ERC20 tokens from the factory when fees are sent. Allows each party to claim the amount they are due. |
 
 ## Upgradability
 
@@ -108,13 +186,13 @@ When deploying an operator, it will also deploy the storage contract and transfe
 
 ### Contracts
 
-| Name                  | Purpose  |
-|-----------------------|----------|
-| OperatorResolver      | Allows the factory to identify which operator to interact with. |
-| MixinOperatorResolver | Abstract contract to load authorized operators in cache (instead of calling `OperatorResolver`). |
-| ZeroExOperator        | Performs token swaps through 0x ([read more](contracts/operators/ZeroEx/README.md)). |
-| ZeroExStorage         | ZeroExOperator storage contract. Must store the 0x `swapTarget`. |
-| FlatOperator          | Handles deposits and withdraws. No interaction with any third parties ([read more](contracts/operators/Flat/README.md)). |
+| Name                  |  LOC | Purpose  |
+|-----------------------|------|----------|
+| **OperatorResolver**     | 59 | Allows the factory to identify which operator to interact with. |
+| **MixinOperatorResolver**| 67 | Abstract contract to load authorized operators in cache (instead of calling `OperatorResolver`). |
+| **ZeroExOperator**       | 33 | Performs token swaps through 0x ([read more](contracts/operators/ZeroEx/README.md)). |
+| **ZeroExStorage**        | 11 | ZeroExOperator storage contract. Must store the 0x `swapTarget`. |
+| **FlatOperator**         | 19 | Handles deposits and withdraws. No interaction with any third parties ([read more](contracts/operators/Flat/README.md)). |
 
 _More operators will be added. e.g. CurveOperator or SynthetixOperator_
 
@@ -212,33 +290,3 @@ The owner of the TimelockController is a three-party multisignature wallet.
 
 # License
 [GNU General Public License v3](https://www.gnu.org/licenses/gpl-3.0.html)
-
-# Links
-
-- **Website** : https://nested.fi
-- **Documentation** : https://docs.nested.finance/
-- **Medium** : https://nestedfinance.medium.com/
-- **Twitter** : https://twitter.com/NestedFinance
-- **Telegram** : https://t.me/NestedFinanceChannel
-- **Discord** : https://discord.gg/VW8ZZsACzd
-
-# Contact us 📝
-
-Wardens! If you have any questions, please contact us!
-
-### Axxe (Smart contract engineer)
-- **Telegram** : @axxedev
-- **Discord** : axxe#8561
-- **Schedule a call** : [Calendly](https://calendly.com/maxime-brugel/lets-talk)
-
-### Adrien (CTO)
-
-- **Telegram** : @adrienspt
-- **Discord** : Adrien | Nested Finance#6564
-- **Schedule a call** : [Calendly](https://calendly.com/adrien-supizet/30min)
-
-# Beta access β
-
-If you want to access the beta version of Nested Finance, go to : https://app.nested.fi/.
-
-It can help to better understand the protocol context.
