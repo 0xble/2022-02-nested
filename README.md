@@ -11,8 +11,6 @@
 - Starts February 10, 2022 00:00 UTC
 - Ends February 12, 2022 23:59 UTC
 
-This repo will be made public before the start of the contest. (C4 delete this line when made public)
-
 ## Scope
 
 All the Solidity files are included in the audit scope, **expect the ones in the `contracts/mocks` folder**.
