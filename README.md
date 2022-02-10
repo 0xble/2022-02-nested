@@ -22,6 +22,8 @@ The preview version has been audited 3 times (at the end of 2021):
 - [Peckshield Audit Report v1.0](audits/PeckShield-Audit-Report-Nested-v1.0.pdf)
 - [Red4Sec Audit Report v1.0](audits/Red4Sec_Nested_Finance_Security_Audit_Report_v3.pdf)
 
+⚠️ We will "dispute" all the issues that were already surfaced in the previous audit => https://github.com/code-423n4/2021-11-nested-findings
+
 ## New version
 
 This new version includes:
